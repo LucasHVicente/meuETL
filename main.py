@@ -1,4 +1,3 @@
-import pandas as pd
 from classes.CovidData import CovidData
 
 obj = CovidData()

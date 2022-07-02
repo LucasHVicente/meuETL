@@ -13,8 +13,8 @@ class TestCovidData:
     def test_fetch_cases(self):
         obj = CovidData()
         obj.fetch_cases()
-        assert len(obj.brazillian_cases) == 27
-        for item in obj.brazillian_cases:
+        assert len(obj.brazilian_cases) == 27
+        for item in obj.brazilian_cases:
             assert item['uf'] in uf_list
 
     def test_export_to_csv(self):
