@@ -1,4 +1,6 @@
 from os.path import exists
+
+import pandas as pd
 from classes.CovidData import CovidData
 
 uf_list = ['RO', 'AC', 'AM', 'RR', 'PA', 'AP', 'TO', 'MA', 'PI', 'CE', 'RN', 'PB', 'PE', 'AL', 'SE', 'BA', 'MG', 'ES', 'RJ', 'SP', 'PR', 'SC', 'RS', 'MS', 'MT', 'GO', 'DF']
@@ -20,4 +22,6 @@ class TestCovidData:
         obj.fetch_cases()
         obj.export_to_csv()
         assert exists('brazil_covid_cases.csv')
+        df = pd.read_csv('brazil_covid_cases.csv')
+        assert len(df) == 27
 
