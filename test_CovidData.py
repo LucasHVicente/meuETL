@@ -12,16 +12,34 @@ class TestCovidData:
     
     def test_fetch_cases(self):
         obj = CovidData()
-        obj.fetch_cases()
-        assert len(obj.brazilian_cases) == 27
-        for item in obj.brazilian_cases:
+        assert len(obj.brazil_cases) == 27
+        for item in obj.brazil_cases:
             assert item['uf'] in uf_list
 
-    def test_export_to_csv(self):
+    def test_export_brazil_to_csv(self):
         obj = CovidData()
-        obj.fetch_cases()
-        obj.export_to_csv()
+        obj.export_brazil_to_csv()
         assert exists('brazil_covid_cases.csv')
         df = pd.read_csv('brazil_covid_cases.csv')
         assert len(df) == 27
+    
+    def test_export_brazil_to_csv_filter(self):
+        obj = CovidData()
+        obj.export_brazil_to_csv(states=['SP', 'RJ'])
+        assert exists('brazil_covid_cases.csv')
+        df = pd.read_csv('brazil_covid_cases.csv')
+        assert len(df) == 2
 
+    def test_export_world_to_csv(self):
+        obj = CovidData()
+        obj.export_world_to_csv()
+        assert exists('world_covid_cases.csv')
+        df = pd.read_csv('world_covid_cases.csv')
+        assert len(df) == 199
+
+    def test_export_world_to_csv(self):
+        obj = CovidData()
+        obj.export_world_to_csv(countries=['Brazil', 'Argentina'])
+        assert exists('world_covid_cases.csv')
+        df = pd.read_csv('world_covid_cases.csv')
+        assert len(df) == 2
