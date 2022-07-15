@@ -37,7 +37,7 @@ class TestCovidData:
         df = pd.read_csv('world_covid_cases.csv')
         assert len(df) == 199
 
-    def test_export_world_to_csv(self):
+    def test_export_world_to_csv_filter(self):
         obj = CovidData()
         obj.export_world_to_csv(countries=['Brazil', 'Argentina'])
         assert exists('world_covid_cases.csv')
