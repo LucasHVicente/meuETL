@@ -10,9 +10,17 @@ class CovidData:
         self.fetch_cases()
     
     def fetch_cases(self):
-        res = requests.get(self.base_url)
+        try:
+            res = requests.get(self.base_url)
+            res.raise_for_status()
+        except requests.exceptions.RequestException as error:
+            raise error
         self.brazil_cases = json.loads(res.text)['data']
-        res = requests.get(self.base_url+'countries/')
+        try: 
+            res = requests.get(self.base_url+'countries/')
+            res.raise_for_status()
+        except requests.exceptions.RequestException as error:
+            raise error
         self.world_cases = json.loads(res.text)['data']
 
     def export_brazil_to_csv(self, columns=None, states=None):
